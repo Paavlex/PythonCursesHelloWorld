@@ -3,14 +3,32 @@ from curses import wrapper
 
 def main(stdscr):
     curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_RED)
-    stdscr.clear()
-    stdscr.addstr(10, 20, "Hello World!", curses.A_UNDERLINE)
-    stdscr.addstr(20, 40, "Hello World!", curses.color_pair(1))
-    stdscr.addstr(30, 60, "Hello World!", curses.A_BLINK)
-    stdscr.addstr(40, 80, "Hello World!", curses.A_DIM)
+    BLUE_AND_RED = curses.color_pair(1)
+    curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_YELLOW)
+    GREEN_AND_YELLOW = curses.color_pair(2)
+    curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_YELLOW)
+    YELLOW_AND_BLACK = curses.color_pair(3)
 
+    stdscr.clear()
 
     stdscr.refresh()
-    stdscr.getch()
+    #stdscr.getch()
+    begin_x = 0 #curses.LINES - 5) 
+    begin_y = (curses.LINES - 3) 
+    height = 3
+    #width = (curses.COLS-1) 
+    width = (curses.COLS)
+    win = curses.newwin(height, width, begin_y, begin_x)
+    win.addstr(0,0,"Hello There!", curses.A_REVERSE)
+    win.border(' ',' ','=',' ','=','=',' ',' ')
     
+    win.addstr(1,5,"Hello",)
+    win.addstr(1,20,"There",)
+    win.addstr(1,30,"!",)
+
+    win.refresh()
+    
+    stdscr.refresh()
+    win.getch()
+
 wrapper(main)
